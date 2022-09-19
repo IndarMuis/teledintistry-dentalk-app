@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681817509979",
+    "project_id": "teledintistry",
+    "storage_bucket": "teledintistry.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681817509979:android:c9b5ca7bb61b4ad1c0ef7e",
+        "android_client_info": {
+          "package_name": "com.teledintistry.teledintistry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681817509979-pepmbb6a1skii9bhula0voi8dub3cg4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADta1zqr8QrwPAi4YCgoQn7rA-LP5JFtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681817509979-pepmbb6a1skii9bhula0voi8dub3cg4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
