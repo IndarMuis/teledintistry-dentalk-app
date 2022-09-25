@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:teledintistry/app/modules/add_queue/views/add_queue_view.dart';
-import 'package:teledintistry/app/modules/agenda_dokter/views/agenda_dokter_view.dart';
+import 'package:teledintistry/app/modules/all_fitur_dokter/views/all_fitur_dokter_view.dart';
 import 'package:teledintistry/app/modules/chat_room/views/chat_room_view.dart';
 import 'package:teledintistry/app/modules/chats/views/chats_view.dart';
 import 'package:teledintistry/app/modules/histories/views/histories_view.dart';
@@ -27,7 +27,7 @@ class MainDoctorView extends GetView<MainDoctorController> {
       return [
         HomeDoctorView(), // HomeView()
         PasienTerdaftarView(),
-        AgendaDokterView(),
+        AllFiturDokterView(),
         ChatsView(),
         ProfileView()
       ];
@@ -50,7 +50,7 @@ class MainDoctorView extends GetView<MainDoctorController> {
             Icons.people_outlined,
             size: 30,
           ),
-          title: ("Pasien"),
+          title: ("Screening"),
           textStyle: primaryTextStyle.copyWith(fontWeight: semiBold),
           activeColorPrimary: primaryColor,
           inactiveColorPrimary: secondaryTextColor,

@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teledintistry/app/modules/histories/views/detail_history_view.dart';
 import 'package:teledintistry/app/modules/histories/views/widgets/histories_header.dart';
-import 'package:teledintistry/app/routes/app_pages.dart';
 import 'package:teledintistry/app/theme.dart';
 
 import '../controllers/histories_controller.dart';
 
 class HistoriesView extends GetView<HistoriesController> {
-  var controller = Get.put(HistoriesController());
+  final controller = Get.put(HistoriesController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(

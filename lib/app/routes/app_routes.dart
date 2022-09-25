@@ -19,7 +19,6 @@ abstract class Routes {
   static const MAIN_DOCTOR = _Paths.MAIN_DOCTOR;
   static const HOME_DOCTOR = _Paths.HOME_DOCTOR;
   static const ODONTOGRAM = _Paths.ODONTOGRAM;
-  static const AGENDA_DOKTER = _Paths.AGENDA_DOKTER;
   static const E_RESEP_DOKTER = _Paths.E_RESEP_DOKTER;
   static const LIST_PASIEN = _Paths.LIST_PASIEN;
   static const COMPLETE_DAFTAR_PROGRAM = _Paths.COMPLETE_DAFTAR_PROGRAM;
@@ -31,6 +30,9 @@ abstract class Routes {
   static const VIEW_FILE_PDF = _Paths.VIEW_FILE_PDF;
   static const DETAIL_PASIEN = _Paths.DETAIL_PASIEN;
   static const PASIEN_TERDAFTAR = _Paths.PASIEN_TERDAFTAR;
+  static const ALL_FITUR_DOKTER = _Paths.ALL_FITUR_DOKTER;
+  static const ARTIKEL_VIEW = _Paths.ARTIKEL_VIEW;
+  static const DETAIL_PROFILE_DOKTER = _Paths.DETAIL_PROFILE_DOKTER;
 }
 
 abstract class _Paths {
@@ -49,7 +51,6 @@ abstract class _Paths {
   static const MAIN_DOCTOR = '/main-doctor';
   static const HOME_DOCTOR = '/home-doctor';
   static const ODONTOGRAM = '/odontogram';
-  static const AGENDA_DOKTER = '/agenda-dokter';
   static const E_RESEP_DOKTER = '/e-resep-dokter';
   static const LIST_PASIEN = '/list-pasien';
   static const COMPLETE_DAFTAR_PROGRAM = '/complete-daftar-program';
@@ -61,4 +62,7 @@ abstract class _Paths {
   static const VIEW_FILE_PDF = '/view-file-pdf';
   static const DETAIL_PASIEN = '/detail-pasien';
   static const PASIEN_TERDAFTAR = '/pasien-terdaftar';
+  static const ALL_FITUR_DOKTER = '/all-fitur-dokter';
+  static const ARTIKEL_VIEW = '/artikel-view';
+  static const DETAIL_PROFILE_DOKTER = '/detail-profile-dokter';
 }

@@ -16,7 +16,7 @@ class DaftarArtikelPopulerCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
+            child: Image.network(
               "${articleImage}",
               fit: BoxFit.cover,
               height: 200,

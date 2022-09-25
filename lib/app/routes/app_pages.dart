@@ -2,8 +2,10 @@ import 'package:get/get.dart';
 
 import 'package:teledintistry/app/modules/add_queue/bindings/add_queue_binding.dart';
 import 'package:teledintistry/app/modules/add_queue/views/add_queue_view.dart';
-import 'package:teledintistry/app/modules/agenda_dokter/bindings/agenda_dokter_binding.dart';
-import 'package:teledintistry/app/modules/agenda_dokter/views/agenda_dokter_view.dart';
+import 'package:teledintistry/app/modules/all_fitur_dokter/bindings/all_fitur_dokter_binding.dart';
+import 'package:teledintistry/app/modules/all_fitur_dokter/views/all_fitur_dokter_view.dart';
+import 'package:teledintistry/app/modules/artikel_view/bindings/artikel_view_binding.dart';
+import 'package:teledintistry/app/modules/artikel_view/views/artikel_view_view.dart';
 import 'package:teledintistry/app/modules/chat_room/bindings/chat_room_binding.dart';
 import 'package:teledintistry/app/modules/chat_room/views/chat_room_view.dart';
 import 'package:teledintistry/app/modules/chats/bindings/chats_binding.dart';
@@ -16,6 +18,8 @@ import 'package:teledintistry/app/modules/daftar_program/bindings/daftar_program
 import 'package:teledintistry/app/modules/daftar_program/views/daftar_program_view.dart';
 import 'package:teledintistry/app/modules/detail_pasien/bindings/detail_pasien_binding.dart';
 import 'package:teledintistry/app/modules/detail_pasien/views/detail_pasien_view.dart';
+import 'package:teledintistry/app/modules/detail_profile_dokter/bindings/detail_profile_dokter_binding.dart';
+import 'package:teledintistry/app/modules/detail_profile_dokter/views/detail_profile_dokter_view.dart';
 import 'package:teledintistry/app/modules/e_resep_dokter/bindings/e_resep_dokter_binding.dart';
 import 'package:teledintistry/app/modules/e_resep_dokter/views/e_resep_dokter_view.dart';
 import 'package:teledintistry/app/modules/histories/bindings/histories_binding.dart';
@@ -132,11 +136,6 @@ class AppPages {
       binding: OdontogramBinding(),
     ),
     GetPage(
-      name: _Paths.AGENDA_DOKTER,
-      page: () => AgendaDokterView(),
-      binding: AgendaDokterBinding(),
-    ),
-    GetPage(
       name: _Paths.E_RESEP_DOKTER,
       page: () => EResepDokterView(),
       binding: EResepDokterBinding(),
@@ -190,6 +189,21 @@ class AppPages {
       name: _Paths.PASIEN_TERDAFTAR,
       page: () => PasienTerdaftarView(),
       binding: PasienTerdaftarBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_FITUR_DOKTER,
+      page: () => AllFiturDokterView(),
+      binding: AllFiturDokterBinding(),
+    ),
+    GetPage(
+      name: _Paths.ARTIKEL_VIEW,
+      page: () => ArtikelViewView(),
+      binding: ArtikelViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_PROFILE_DOKTER,
+      page: () => DetailProfileDokterView(),
+      binding: DetailProfileDokterBinding(),
     ),
   ];
 }

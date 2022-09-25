@@ -8,7 +8,7 @@ import '../controllers/complete_daftar_program_controller.dart';
 
 class CompleteDaftarProgramView
     extends GetView<CompleteDaftarProgramController> {
-  var controller = Get.put(CompleteDaftarProgramController());
+  final controller = Get.put(CompleteDaftarProgramController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(

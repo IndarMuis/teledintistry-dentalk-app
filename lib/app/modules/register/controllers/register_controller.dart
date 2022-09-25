@@ -36,11 +36,13 @@ class RegisterController extends GetxController {
           "username": usernameController.text,
           "umur": umurController.text,
           "alamat": alamatController.text,
-          "telepon": teleponController.text,
+          "telepon": (teleponController.text[0] == "+62")
+              ? teleponController.text
+              : teleponController.text.replaceFirst('0', '+62'),
           "email": emailController.text,
           "password": passwordController.text,
           "user_role": "user",
-          "image": "",
+          "image_user": "",
           "odontogram": {},
         });
         await users.doc(userCredential.user!.uid).collection("chats");

@@ -385,27 +385,6 @@ class DetailPasienView extends GetView<DetailPasienController> {
                             color: primaryColor,
                           ),
                         )),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          elevation: 1,
-                          primary: errorColor,
-                          padding: EdgeInsets.all(10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: Text(
-                          "Hentikan Program",
-                          style: primaryTextStyle.copyWith(
-                            fontSize: 15,
-                            fontWeight: semiBold,
-                            color: backgroundColor,
-                          ),
-                        ))
                   ],
                 ),
               )),

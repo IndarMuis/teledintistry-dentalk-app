@@ -65,6 +65,7 @@ class EResepDokterController extends GetxController {
             message: "Silahkan masukkan file resep terlebih dahulu");
       }
     } on FirebaseException catch (e) {
+      print(e.message);
       isLoading.value = false;
       await errorSnackBar(
           title: "Gagal Mengirim Resep",

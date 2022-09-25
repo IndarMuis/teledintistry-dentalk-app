@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:teledintistry/app/helper_widget.dart';
 import 'package:teledintistry/app/modules/profile/controllers/profile_controller.dart';
 import 'package:teledintistry/app/modules/profile/views/widgets/profile_card.dart';
 import 'package:teledintistry/app/modules/profile/views/widgets/profile_header.dart';
@@ -21,43 +22,81 @@ class ProfileUserContent extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: [
               Center(
-                child: Container(
-                  height: 170,
-                  width: 170,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryColor,
-                      border: Border.all(color: secondaryTextColor),
-                      image: (controller.dataUser['image_user'] != null)
-                          ? DecorationImage(
+                child: (controller.dataUser['image_user'] != "")
+                    ? Container(
+                        height: 170,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: primaryColor,
+                            border: Border.all(color: secondaryTextColor),
+                            image: DecorationImage(
                               image: NetworkImage(
-                                  "${controller.dataDokter['image_user']}"),
-                              fit: BoxFit.fitHeight)
-                          : DecorationImage(
+                                "${controller.dataUser['image_user']}",
+                              ),
+                              fit: BoxFit.cover,
+                            )),
+                      )
+                    : Container(
+                        height: 170,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: primaryColor,
+                            border: Border.all(color: secondaryTextColor),
+                            image: DecorationImage(
                               image: AssetImage(
                                 "assets/no_image.png",
                               ),
                               fit: BoxFit.cover,
                             )),
-                ),
+                      ),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  margin: EdgeInsets.only(left: 150, bottom: 10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: primaryColor,
-                  ),
-                  child: Icon(
-                    Icons.add_a_photo,
-                    size: 20,
-                    color: backgroundColor,
-                  ),
-                ),
-              ),
+              (controller.dataUser['image_user'] == "")
+                  ? GestureDetector(
+                      onTap: () {
+                        controller.uploadImage();
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        margin: EdgeInsets.only(left: 150, bottom: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primaryColor,
+                        ),
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 20,
+                          color: backgroundColor,
+                        ),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        dialogVerification(
+                            onConfirm: () {
+                              controller.deleteImage();
+                            },
+                            title: "Hapus Foto Profile",
+                            icon: Icons.delete,
+                            color: errorColor.withOpacity(0.8));
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        margin: EdgeInsets.only(left: 150, bottom: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: errorColor,
+                        ),
+                        child: Icon(
+                          Icons.delete,
+                          size: 20,
+                          color: backgroundColor,
+                        ),
+                      ),
+                    ),
             ],
           ),
           SizedBox(
@@ -95,8 +134,8 @@ class ProfileUserContent extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 20),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(13),
-                  primary: Colors.red[900],
+                  padding: EdgeInsets.all(10),
+                  primary: errorColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(defaultMargin)),
                 ),
@@ -119,7 +158,7 @@ class ProfileUserContent extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.logout,
-                                  color: Colors.red[900]!.withOpacity(0.7),
+                                  color: errorColor.withOpacity(0.7),
                                   size: 75,
                                 ),
                                 SizedBox(

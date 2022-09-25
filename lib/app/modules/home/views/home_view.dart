@@ -121,45 +121,87 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                   itemCount: controller.dataDokter.length,
                                   itemBuilder: (context, index) {
-                                    return Container(
-                                      color: primaryColor,
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: RotatedBox(
-                                              quarterTurns: 3,
-                                              child: Center(
-                                                child: Text(
-                                                  "${controller.dataDokter[index]['nama_dokter']}",
-                                                  style:
-                                                      primaryTextStyle.copyWith(
-                                                    fontSize: 15,
-                                                    fontWeight: semiBold,
-                                                    color: backgroundColor,
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(
+                                            Routes.DETAIL_PROFILE_DOKTER,
+                                            arguments:
+                                                controller.dataDokter[index]
+                                                    ['id_dokter']);
+                                      },
+                                      child: Container(
+                                        color: primaryColor,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: RotatedBox(
+                                                quarterTurns: 3,
+                                                child: Center(
+                                                  child: Text(
+                                                    "${controller.dataDokter[index]['nama_dokter']}",
+                                                    style: primaryTextStyle
+                                                        .copyWith(
+                                                      fontSize: 15,
+                                                      fontWeight: semiBold,
+                                                      color: backgroundColor,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                top: defaultMargin,
-                                              ),
-                                              child: Image.network(
-                                                "${controller.dataDokter[index]['image_dokter']}",
-                                                fit: BoxFit.cover,
-                                                width: 500,
-                                                height: 500,
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: defaultMargin,
+                                                ),
+                                                child: Image.network(
+                                                  "${controller.dataDokter[index]['image_dokter']}",
+                                                  loadingBuilder: (context,
+                                                      child, loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    }
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: backgroundColor,
+                                                      ),
+                                                    );
+                                                  },
+                                                  fit: BoxFit.cover,
+                                                  width: 500,
+                                                  height: 500,
+                                                ),
+                                                // child: CachedNetworkImage(
+                                                //   width: 500,
+                                                //   height: 500,
+                                                //   fit: BoxFit.cover,
+                                                //   alignment: Alignment.center,
+                                                //   imageUrl:
+                                                //       "${controller.dataDokter[index]['image_dokter']}",
+                                                //   placeholder: (context, url) =>
+                                                //       SizedBox(
+                                                //     height: 50,
+                                                //     width: 50,
+                                                //     child:
+                                                //         CircularProgressIndicator(
+                                                //       color: backgroundColor,
+                                                //     ),
+                                                //   ),
+                                                //   errorWidget:
+                                                //       (context, url, error) =>
+                                                //           Icon(Icons.error),
+                                                // ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     );
                                   })
@@ -196,34 +238,47 @@ class HomeView extends GetView<HomeController> {
                               SizedBox(
                                 height: 15,
                               ),
-                              Column(
-                                children:
-                                    controller.listOfArticles.map((value) {
-                                  return Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          "${value['articleTitle']}",
-                                          style: primaryTextStyle.copyWith(
-                                            fontSize: 15,
-                                            fontWeight: medium,
-                                          ),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: 3,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.ARTIKEL_VIEW,
+                                            arguments:
+                                                controller.dataArtikel[index]
+                                                    ['url_artikel']);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(bottom: 20),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                "${controller.dataArtikel[index]['title_artikel']}",
+                                                style:
+                                                    primaryTextStyle.copyWith(
+                                                  fontSize: 15,
+                                                  fontWeight: medium,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.network(
+                                                "${controller.dataArtikel[index]['image_artikel']}",
+                                                width: 100,
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: Image.asset(
-                                          "${value['articleImage']}",
-                                          width: 100,
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                }).toList(),
-                              )
+                                    );
+                                  })
                             ],
                           ),
                         )

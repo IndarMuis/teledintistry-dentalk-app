@@ -65,6 +65,7 @@ class LoginView extends GetView<LoginController> {
                 elevation: 5,
                 borderRadius: BorderRadius.all(Radius.circular(25)),
                 child: TextFormField(
+                  obscureText: true,
                   controller: controller.passwordController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
@@ -83,7 +84,7 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 50,
               ),
               Obx(() => ElevatedButton(
                     onPressed: () {
@@ -91,7 +92,7 @@ class LoginView extends GetView<LoginController> {
                     },
                     style: ElevatedButton.styleFrom(
                         primary: primaryColor,
-                        padding: EdgeInsets.all(15),
+                        padding: EdgeInsets.all(10),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -108,7 +109,7 @@ class LoginView extends GetView<LoginController> {
                             style: primaryTextStyle.copyWith(
                                 fontWeight: semiBold,
                                 color: backgroundColor,
-                                fontSize: 20),
+                                fontSize: 18),
                           ),
                   )),
               SizedBox(

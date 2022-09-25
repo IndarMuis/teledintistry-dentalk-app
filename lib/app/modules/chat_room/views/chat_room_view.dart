@@ -40,8 +40,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                   width: 5,
                 ),
                 FutureBuilder<Map<String, dynamic>>(
-                    future: controller.dataFriend(
-                        email: Get.arguments['friend_email']),
+                    future: controller.dataFriend(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         var dataImageUser = snapshot.data!['image'];
@@ -103,8 +102,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
               return Future.value(false);
             },
             child: FutureBuilder<Map<String, dynamic>>(
-                future:
-                    controller.dataFriend(email: Get.arguments['friend_email']),
+                future: controller.dataFriend(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     var cekPasien = snapshot.data!['user_role'];
@@ -129,7 +127,11 @@ class ChatRoomView extends GetView<ChatRoomController> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              print(data['telepon']);
+                              controller
+                                  .chatDokterFromWhatsApp(data['telepon']);
+                            },
                             child: CircleAvatar(
                               backgroundColor: primaryColor,
                               radius: 20,
@@ -162,7 +164,10 @@ class ChatRoomView extends GetView<ChatRoomController> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              controller
+                                  .chatDokterFromWhatsApp(data['nomor_dokter']);
+                            },
                             child: CircleAvatar(
                               backgroundColor: primaryColor,
                               radius: 20,
@@ -194,8 +199,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                 margin: EdgeInsets.only(top: 5),
                 width: Get.width,
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                    stream: controller.streamChats(
-                        chat_id: Get.arguments['chat_id']),
+                    stream: controller.streamChats(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
                         if (snapshot.hasData) {

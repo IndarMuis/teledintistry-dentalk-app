@@ -7,6 +7,7 @@ import 'package:teledintistry/app/modules/chat_room/views/chat_room_view.dart';
 import 'package:teledintistry/app/modules/chats/views/chats_view.dart';
 import 'package:teledintistry/app/modules/histories/views/histories_view.dart';
 import 'package:teledintistry/app/modules/home/views/home_view.dart';
+import 'package:teledintistry/app/modules/notifikasi/views/notifikasi_view.dart';
 import 'package:teledintistry/app/modules/profile/views/profile_view.dart';
 import 'package:teledintistry/app/theme.dart';
 
@@ -22,9 +23,8 @@ class MainView extends GetView<MainController> {
       return [
         HomeView(),
         HistoriesView(),
-        AddQueueView(),
+        NotifikasiView(),
         ChatsView(),
-        // ChatRoomView(),
         ProfileView()
       ];
     }
@@ -53,7 +53,7 @@ class MainView extends GetView<MainController> {
         ),
         PersistentBottomNavBarItem(
           icon: Icon(
-            Icons.queue_outlined,
+            Icons.notifications_active,
             size: 30,
             color: backgroundColor,
           ),
@@ -86,6 +86,9 @@ class MainView extends GetView<MainController> {
 
     return PersistentTabView(
       context,
+      onItemSelected: (value) {
+        print(value);
+      },
       navBarHeight: 65,
       controller: _controller,
       screens: _buildScreens(),

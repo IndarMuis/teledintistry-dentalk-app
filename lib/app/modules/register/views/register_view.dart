@@ -12,7 +12,7 @@ class RegisterView extends GetView<RegisterController> {
         backgroundColor: backgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: backgroundColor,
+          backgroundColor: Colors.transparent,
           leading: GestureDetector(
               onTap: () {
                 Get.offAllNamed(Routes.LOGIN);
@@ -53,7 +53,7 @@ class RegisterView extends GetView<RegisterController> {
                   controller: controller.usernameController,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    hintText: "Username",
+                    hintText: "Nama Lengkap",
                     suffixIcon: Icon(Icons.person_outlined),
                     focusColor: secondaryTextColor,
                     suffixIconColor: secondaryTextColor,
@@ -208,7 +208,7 @@ class RegisterView extends GetView<RegisterController> {
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Color(0xffF39A0E),
-                        padding: EdgeInsets.all(15),
+                        padding: EdgeInsets.all(10),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -224,7 +224,7 @@ class RegisterView extends GetView<RegisterController> {
                             style: primaryTextStyle.copyWith(
                                 fontWeight: semiBold,
                                 color: backgroundColor,
-                                fontSize: 20),
+                                fontSize: 18),
                           ),
                   )),
               SizedBox(

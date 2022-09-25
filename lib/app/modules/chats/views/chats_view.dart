@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:teledintistry/app/modules/chats/views/widgets/chat_view_header.dart';
-import 'package:teledintistry/app/routes/app_pages.dart';
 import 'package:teledintistry/app/theme.dart';
 
 import '../controllers/chats_controller.dart';
 
 class ChatsView extends GetView<ChatsController> {
-  var controller = Get.put(ChatsController());
+  final controller = Get.put(ChatsController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -109,14 +108,14 @@ class ChatsView extends GetView<ChatsController> {
                                                         child: ChatListCard(
                                                             name: profileDokter[
                                                                 'nama_dokter'],
-                                                            message:
-                                                                "haiii haii",
+                                                            phoneNumber:
+                                                                profileDokter[
+                                                                    'nomor_dokter'],
                                                             chatCount:
                                                                 realtimeChatDokter[
                                                                             0]
                                                                         .data()[
                                                                     'total_unread'],
-                                                            time: "4.20",
                                                             imageUrl: profileDokter[
                                                                 'image_dokter']),
                                                       );
@@ -160,12 +159,9 @@ class ChatsView extends GetView<ChatsController> {
                                           controller.dataDokter['dokter']
                                               ['email_dokter']);
                                     },
-                                    child: ChatListCard(
+                                    child: ChatListUser(
                                         name: controller.dataDokter['dokter']
                                             ['nama_dokter'],
-                                        message: "",
-                                        chatCount: 0,
-                                        time: "CHAT",
                                         imageUrl:
                                             controller.dataDokter['dokter']
                                                 ['image_dokter']),
@@ -248,15 +244,14 @@ class ChatsView extends GetView<ChatsController> {
                                                                             'connection']);
                                                                       },
                                                                       child: ChatListCard(
-                                                                          name: profilePasien[index][
+                                                                          name: profilePasien[index]
+                                                                              [
                                                                               'username'],
-                                                                          message:
-                                                                              "ihhihihh",
+                                                                          phoneNumber:
+                                                                              "${profilePasien[index]['telepon']}",
                                                                           chatCount: realTimeChatPasien[indexRealtimeChatPasien]
                                                                               [
                                                                               'total_unread'],
-                                                                          time:
-                                                                              "4.20",
                                                                           imageUrl:
                                                                               ""),
                                                                     );
@@ -309,12 +304,9 @@ class ChatsView extends GetView<ChatsController> {
                                             // print(controller.dataPasien[index]
                                             //     ['pasien']['email_pasien']);
                                           },
-                                          child: ChatListCard(
+                                          child: ChatListUser(
                                               name: controller.dataPasien[index]
                                                   ['pasien']['nama_pasien'],
-                                              message: "",
-                                              chatCount: 0,
-                                              time: "CHAT",
                                               imageUrl: ""),
                                         );
                                       })
@@ -333,16 +325,14 @@ class ChatListCard extends StatelessWidget {
   ChatListCard({
     Key? key,
     required this.name,
-    required this.message,
+    required this.phoneNumber,
     required this.chatCount,
-    required this.time,
     required this.imageUrl,
   }) : super(key: key);
-  late String? name;
-  late String message;
-  late int chatCount;
-  late String time;
-  late String imageUrl;
+  final String name;
+  final String phoneNumber;
+  final int chatCount;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -395,7 +385,7 @@ class ChatListCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "$message",
+                      "$phoneNumber",
                       style: secondaryTextStyle.copyWith(
                           fontSize: 13, fontWeight: light),
                       maxLines: 1,
@@ -404,48 +394,117 @@ class ChatListCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  Text(
-                    "$time",
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 13,
-                      fontWeight: light,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  (chatCount < 1)
-                      ? SizedBox()
-                      : Material(
-                          borderRadius: BorderRadius.circular(100),
-                          color: primaryColor,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(100),
-                            onTap: () {},
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: Center(
-                                child: Text(
-                                  (chatCount > 99) ? "99+" : "$chatCount",
-                                  style: primaryTextStyle.copyWith(
-                                    fontSize: 11,
-                                    fontWeight: semiBold,
-                                    color: backgroundColor,
-                                  ),
-                                ),
+              (chatCount < 1)
+                  ? SizedBox()
+                  : Material(
+                      borderRadius: BorderRadius.circular(100),
+                      color: primaryColor,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(100),
+                        onTap: () {},
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100)),
+                          child: Center(
+                            child: Text(
+                              (chatCount > 99) ? "99+" : "$chatCount",
+                              style: primaryTextStyle.copyWith(
+                                fontSize: 11,
+                                fontWeight: semiBold,
+                                color: backgroundColor,
                               ),
                             ),
                           ),
-                        )
-                ],
+                        ),
+                      ),
+                    )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ChatListUser extends StatelessWidget {
+  ChatListUser({
+    Key? key,
+    required this.name,
+    required this.imageUrl,
+  }) : super(key: key);
+  final String name;
+  final String imageUrl;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Material(
+        shadowColor: primaryColor.withOpacity(0.5),
+        elevation: 4,
+        borderRadius: BorderRadius.all(Radius.circular(defaultMargin)),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            children: [
+              (imageUrl.isNotEmpty)
+                  ? Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: primaryColor, width: 2),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(imageUrl),
+                              fit: BoxFit.fitHeight)),
+                    )
+                  : CircleAvatar(
+                      radius: 27,
+                      backgroundColor: primaryColor,
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: backgroundColor,
+                      ),
+                    ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "$name",
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 15,
+                        fontWeight: semiBold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                margin: EdgeInsets.only(right: 10),
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Kirim Pesan",
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 10,
+                    fontWeight: semiBold,
+                    color: Colors.white,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               )
             ],
           ),

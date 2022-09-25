@@ -4,19 +4,19 @@ import '../../../../theme.dart';
 
 class DaftarProgramCard extends StatelessWidget {
   DaftarProgramCard({required this.programName, required this.programImage});
-  String programName;
-  String programImage;
+  final String programName;
+  final String programImage;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: EdgeInsets.only(bottom: 40),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 4,
+      height: MediaQuery.of(context).size.height / 5,
       decoration: BoxDecoration(
           boxShadow: [BoxShadow(color: primaryTextColor)],
           borderRadius: BorderRadius.circular(defaultMargin),
           image: DecorationImage(
-              image: AssetImage("${programImage}"), fit: BoxFit.cover)),
+              image: NetworkImage("${programImage}"), fit: BoxFit.cover)),
       child: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(

@@ -60,11 +60,25 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                                     ],
                                   ),
                                 ),
+                                // Image.network(
+                                //     "${controller.dataDokter['image_dokter']}",
+                                //     width: 130,
+                                //     height: 130, loadingBuilder:
+                                //         (context, child, loadingProgress) {
+                                //   if (loadingProgress == null) {
+                                //     return child;
+                                //   }
+                                //   return Center(
+                                //     child: CircularProgressIndicator(
+                                //       color: backgroundColor,
+                                //     ),
+                                //   );
+                                // })
                                 Container(
-                                  width: 120,
-                                  height: 120,
+                                  width: 130,
+                                  height: 130,
                                   decoration: BoxDecoration(
-                                    // border: Border.all(color: backgroundColor),
+                                    border: Border.all(color: backgroundColor),
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         image: NetworkImage(
@@ -101,11 +115,16 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              programCard(
-                                  title: "Screening",
-                                  subtitle: "Pemeriksaan",
-                                  color: Color(0xff4D96FF),
-                                  icon: Icons.search),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(Routes.PASIEN_TERDAFTAR);
+                                },
+                                child: programCard(
+                                    title: "Screening",
+                                    subtitle: "Pemeriksaan",
+                                    color: Color(0xff4D96FF),
+                                    icon: Icons.search),
+                              ),
                               GestureDetector(
                                 onTap: () {
                                   Get.toNamed(Routes.LIST_PASIEN,
@@ -114,7 +133,7 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                                 child: programCard(
                                     title: "E-Resep",
                                     subtitle: "Resep Elektronik",
-                                    color: Color(0xffF9CC4A),
+                                    color: Color(0xffF98121),
                                     icon: Icons.receipt_rounded),
                               ),
                               GestureDetector(
@@ -136,7 +155,7 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                                 child: programCard(
                                     title: "Odontogram",
                                     subtitle: "Rekam Medis",
-                                    color: Color(0xffF98121),
+                                    color: primaryColor,
                                     icon: Icons.medical_services),
                               )
                             ],
@@ -178,11 +197,10 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                                children:
-                                    controller.listOfArticles.map((value) {
+                                children: controller.dataArtikel.map((value) {
                               return DaftarArtikelPopulerCard(
-                                  articleTitle: value['articleTitle']!,
-                                  articleImage: value['articleImage']!);
+                                  articleTitle: value['title_artikel']!,
+                                  articleImage: value['image_artikel']!);
                             }).toList()),
                           ),
                         ),
@@ -204,33 +222,45 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: defaultMargin, right: defaultMargin),
-                          child: Column(
-                            children: controller.listOfArticles.map((value) {
-                              return Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "${value['articleTitle']}",
-                                      style: primaryTextStyle.copyWith(
-                                        fontSize: 15,
-                                        fontWeight: medium,
-                                      ),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(Routes.ARTIKEL_VIEW,
+                                        arguments: controller.dataArtikel[index]
+                                            ['url_artikel']);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(bottom: 20),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            "${controller.dataArtikel[index]['title_artikel']}",
+                                            style: primaryTextStyle.copyWith(
+                                              fontSize: 15,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          child: Image.network(
+                                            "${controller.dataArtikel[index]['image_artikel']}",
+                                            width: 100,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image.asset(
-                                      "${value['articleImage']}",
-                                      width: 100,
-                                    ),
-                                  )
-                                ],
-                              );
-                            }).toList(),
-                          ),
+                                );
+                              }),
                         )
                       ]),
                     ),

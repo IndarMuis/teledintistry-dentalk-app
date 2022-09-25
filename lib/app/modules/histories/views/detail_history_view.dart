@@ -159,7 +159,36 @@ class DetailHistoryView extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                // SizedBox(
+                //   height: 30,
+                // ),
+                // Text(
+                //   "Sisa waktu pemeriksaan program",
+                //   style: primaryTextStyle.copyWith(
+                //     fontSize: 18,
+                //     fontWeight: bold,
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //   padding: EdgeInsets.all(15),
+                //   decoration: BoxDecoration(
+                //       color: Colors.white,
+                //       border: Border.all(width: 1.5, color: primaryColor),
+                //       borderRadius: BorderRadius.circular(15)),
+                //   child: Center(
+                //     child: Text(
+                //       "Pemeriksaan : Per ${controller.data['program']['frekuensi_pemeriksaan_program']} minggu",
+                //       style: primaryTextStyle.copyWith(
+                //         fontSize: 15,
+                //         fontWeight: bold,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             );
           }),
@@ -167,7 +196,7 @@ class DetailHistoryView extends StatelessWidget {
         bottomNavigationBar:
             GetBuilder<HistoriesController>(builder: (controller) {
           return Container(
-            height: 70,
+            height: 60,
             margin: EdgeInsets.only(bottom: defaultMargin),
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Obx(() => ElevatedButton(
@@ -181,7 +210,7 @@ class DetailHistoryView extends StatelessWidget {
                     elevation: 0,
                     minimumSize: Size(
                         MediaQuery.of(context).size.width / 2 - defaultMargin,
-                        30),
+                        double.infinity),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(color: errorColor, width: 1.5))),
@@ -196,7 +225,7 @@ class DetailHistoryView extends StatelessWidget {
                         style: primaryTextStyle.copyWith(
                             fontWeight: semiBold,
                             color: errorColor,
-                            fontSize: 20),
+                            fontSize: 18),
                       ))),
           );
         }),

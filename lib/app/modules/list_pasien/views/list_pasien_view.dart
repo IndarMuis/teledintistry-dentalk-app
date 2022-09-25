@@ -164,36 +164,43 @@ class ListPasienView extends GetView<ListPasienController> {
                             right: defaultMargin,
                             bottom: 50),
                         width: double.infinity,
-                        child: ListView(
-                          shrinkWrap: true,
-                          physics: ScrollPhysics(),
-                          children: controller.daftarPasien.map((data) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(
-                                  (controller.fromPage.value
-                                          .contains("odontogram"))
-                                      ? Routes.ODONTOGRAM
-                                      : (controller.fromPage.value
-                                              .contains("resep"))
-                                          ? Routes.E_RESEP_DOKTER
-                                          : Routes.RUJUKAN,
-                                  arguments: {
-                                    "id_user": data['pasien']['id_user']
-                                  },
-                                );
-                              },
-                              child: pasienCard(
-                                nama: data['pasien']['nama_pasien'],
-                                umur: data['pasien']['umur_pasien'],
-                                alamat: data['pasien']['alamat_pasien'],
-                                program: data['program']['nama_program'],
-                                tanggalDaftar: data['program']
-                                    ['tanggal_daftar_program'],
+                        child: (controller.daftarPasien.isEmpty)
+                            ? Center(
+                                child: Text(
+                                "Saat ini anda belum memiliki pasien",
+                                style: secondaryTextStyle.copyWith(
+                                    fontSize: 18, fontWeight: semiBold),
+                              ))
+                            : ListView(
+                                shrinkWrap: true,
+                                physics: ScrollPhysics(),
+                                children: controller.daftarPasien.map((data) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        (controller.fromPage.value
+                                                .contains("odontogram"))
+                                            ? Routes.ODONTOGRAM
+                                            : (controller.fromPage.value
+                                                    .contains("resep"))
+                                                ? Routes.E_RESEP_DOKTER
+                                                : Routes.RUJUKAN,
+                                        arguments: {
+                                          "id_user": data['pasien']['id_user']
+                                        },
+                                      );
+                                    },
+                                    child: pasienCard(
+                                      nama: data['pasien']['nama_pasien'],
+                                      umur: data['pasien']['umur_pasien'],
+                                      alamat: data['pasien']['alamat_pasien'],
+                                      program: data['program']['nama_program'],
+                                      tanggalDaftar: data['program']
+                                          ['tanggal_daftar_program'],
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                            );
-                          }).toList(),
-                        ),
                       )
                     ],
                   )

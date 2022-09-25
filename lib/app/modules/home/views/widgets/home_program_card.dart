@@ -16,7 +16,9 @@ class HomeProgramCard extends StatelessWidget {
           boxShadow: [BoxShadow(color: primaryTextColor)],
           borderRadius: BorderRadius.circular(defaultMargin),
           image: DecorationImage(
-              image: NetworkImage("${programImage}"), fit: BoxFit.cover)),
+            image: NetworkImage("${programImage}"),
+            fit: BoxFit.cover,
+          )),
       child: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:teledintistry/app/helper_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatRoomController extends GetxController {
   late TextEditingController chatController;
@@ -17,15 +20,37 @@ class ChatRoomController extends GetxController {
   int total_unread = 0;
   late ScrollController scrollController;
 
-  Future<Map<String, dynamic>> dataFriend({required String email}) async {
+  var friendEmail = "".obs;
+  var chatId = "".obs;
+
+  chatDokterFromWhatsApp(String number) async {
+    var whatsappURl_android = "whatsapp://send?phone=$number&text=hello";
+
+    await launchUrl(Uri.parse(whatsappURl_android));
+    // if (Platform.isAndroid) {
+    //   if (await canLaunchUrl(Uri.parse(whatsappURl_android))) {
+    //   } else {
+    //     await errorSnackBar(
+    //         title: "Failed ro direct whatsapp",
+    //         message: "Whatsapp not installed");
+    //   }
+    // } else {
+    //   await errorSnackBar(
+    //       title: "Failed ro direct whatsapp",
+    //       message: "Whatsapp not installed");
+    // }
+  }
+
+  Future<Map<String, dynamic>> dataFriend() async {
+    // var friendEmail = await Get.arguments['friend_email'];
     var pasien = await _firestore
         .collection("users")
-        .where("email", isEqualTo: email)
+        .where("email", isEqualTo: friendEmail.value)
         .get();
 
     var dokter = await _firestore
         .collection("dokter")
-        .where("email_dokter", isEqualTo: email)
+        .where("email_dokter", isEqualTo: friendEmail.value)
         .get();
 
     var existPasien = await existingUser(auth.currentUser!.uid);
@@ -37,11 +62,14 @@ class ChatRoomController extends GetxController {
     }
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> streamChats(
-      {required String chat_id}) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamChats() {
     CollectionReference chats = _firestore.collection("chats");
 
-    return chats.doc(chat_id).collection("chat").orderBy("time").snapshots();
+    return chats
+        .doc(chatId.value)
+        .collection("chat")
+        .orderBy("time")
+        .snapshots();
   }
 
   void test(String email) async {
@@ -54,7 +82,6 @@ class ChatRoomController extends GetxController {
 
   Future<bool> existingUser(String uid) async {
     CollectionReference users = await _firestore.collection("users");
-    CollectionReference dokter = await _firestore.collection("dokter");
 
     var existUser = await users.doc(uid).get();
 
@@ -90,7 +117,7 @@ class ChatRoomController extends GetxController {
         await users
             .doc(auth.currentUser!.uid)
             .collection("chats")
-            .doc(argument['chat_id'])
+            .doc(chatId.value)
             .update({
           "lastTime": date,
         });
@@ -98,7 +125,7 @@ class ChatRoomController extends GetxController {
         await dokter
             .doc(auth.currentUser!.uid)
             .collection("chats")
-            .doc(argument['chat_id'])
+            .doc(chatId.value)
             .update({
           "lastTime": date,
         });
@@ -108,7 +135,7 @@ class ChatRoomController extends GetxController {
         // PASIEN CHAT DOKTER
 
         final getDataFriend = await dokter
-            .where("email_dokter", isEqualTo: argument['friend_email'])
+            .where("email_dokter", isEqualTo: friendEmail.value)
             .get();
 
         final uidFriend =
@@ -117,12 +144,12 @@ class ChatRoomController extends GetxController {
         final checkChatsFriend = await dokter
             .doc(uidFriend)
             .collection("chats")
-            .doc(argument['chat_id'])
+            .doc(chatId.value)
             .get();
 
         if (checkChatsFriend.exists) {
           var cekTotalUnread = await chats
-              .doc(argument['chat_id'])
+              .doc(chatId.value)
               .collection("chat")
               .where("isRead", isEqualTo: false)
               .where("pengirim", isEqualTo: email)
@@ -132,12 +159,12 @@ class ChatRoomController extends GetxController {
           await dokter
               .doc(uidFriend)
               .collection("chats")
-              .doc(argument['chat_id'])
+              .doc(chatId.value)
               .update({
             "lastTime": date,
             "total_unread": total_unread + 1,
           });
-          await chats.doc(argument['chat_id']).collection("chat").add({
+          await chats.doc(chatId.value).collection("chat").add({
             "pengirim": email,
             "penerima": argument['friend_email'],
             "chat": chat,
@@ -150,13 +177,13 @@ class ChatRoomController extends GetxController {
           await dokter
               .doc(uidFriend)
               .collection("chats")
-              .doc(argument['chat_id'])
+              .doc(chatId.value)
               .set({
             "connection": email,
             "lastTime": date,
             "total_unread": 1,
           });
-          await chats.doc(argument['chat_id']).collection("chat").add({
+          await chats.doc(chatId.value).collection("chat").add({
             "pengirim": email,
             "penerima": argument['friend_email'],
             "chat": chat,
@@ -184,14 +211,14 @@ class ChatRoomController extends GetxController {
         final checkChatsFriend = await users
             .doc(uidFriend)
             .collection("chats")
-            .doc(argument['chat_id'])
+            .doc(chatId.value)
             .get();
 
         if (checkChatsFriend.exists) {
           print("sudah ada sebelumnya");
 
           var cekTotalUnread = await chats
-              .doc(argument['chat_id'])
+              .doc(chatId.value)
               .collection("chat")
               .where("isRead", isEqualTo: false)
               .where("pengirim", isEqualTo: email)
@@ -202,13 +229,13 @@ class ChatRoomController extends GetxController {
           await users
               .doc(uidFriend)
               .collection("chats")
-              .doc(argument['chat_id'])
+              .doc(chatId.value)
               .update({
             "lastTime": date,
             "total_unread": total_unread + 1,
           });
 
-          await chats.doc(argument['chat_id']).collection("chat").add({
+          await chats.doc(chatId.value).collection("chat").add({
             "pengirim": email,
             "penerima": argument['friend_email'],
             "chat": chat,
@@ -219,16 +246,12 @@ class ChatRoomController extends GetxController {
           });
         } else {
           print("buat baru");
-          await users
-              .doc(uidFriend)
-              .collection("chats")
-              .doc(argument['chat_id'])
-              .set({
+          await users.doc(uidFriend).collection("chats").doc(chatId.value).set({
             "connection": email,
             "lastTime": date,
             "total_unread": 1,
           });
-          await chats.doc(argument['chat_id']).collection("chat").add({
+          await chats.doc(chatId.value).collection("chat").add({
             "pengirim": email,
             "penerima": argument['friend_email'],
             "chat": chat,
@@ -250,14 +273,17 @@ class ChatRoomController extends GetxController {
 
   @override
   void onInit() {
+    print("Get arguments");
+    print(Get.arguments);
+    friendEmail.value = Get.arguments['friend_email'];
+    chatId.value = Get.arguments['chat_id'];
+
     focusNode = FocusNode();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         openEmoji.value = false;
       }
     });
-
-    print(Get.arguments);
 
     chatController = TextEditingController();
     scrollController = ScrollController();

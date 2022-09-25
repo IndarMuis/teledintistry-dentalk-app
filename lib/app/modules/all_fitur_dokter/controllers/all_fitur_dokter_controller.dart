@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class AgendaDokterController extends GetxController {
-  //TODO: Implement AgendaDokterController
+class AllFiturDokterController extends GetxController {
+  //TODO: Implement AllFiturDokterController
 
   final count = 0.obs;
   @override

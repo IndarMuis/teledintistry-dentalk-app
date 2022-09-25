@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
 class HomeDoctorController extends GetxController {
@@ -29,6 +28,7 @@ class HomeDoctorController extends GetxController {
 
   var idDokter = "".obs;
   var dataDokter = {}.obs;
+  var dataArtikel = [].obs;
   var isLoading = false.obs;
 
   @override
@@ -36,14 +36,23 @@ class HomeDoctorController extends GetxController {
     isLoading.value = true;
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     var dokterCollection = FirebaseFirestore.instance.collection("dokter");
+    var artikel = FirebaseFirestore.instance.collection("artikel");
 
     idDokter.value = firebaseAuth.currentUser!.uid;
+
+    var docArtikel = await artikel;
 
     var data = await dokterCollection.doc(idDokter.value).get();
 
     dataDokter.value = data.data()!;
 
-    print(dataDokter);
+    await docArtikel.get().then((value) => {
+          value.docs.forEach((element) {
+            dataArtikel.add(element.data());
+          })
+        });
+
+    print(dataArtikel.length);
     isLoading.value = false;
     super.onInit();
   }

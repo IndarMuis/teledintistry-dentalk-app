@@ -48,15 +48,6 @@ class HomeHeader extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-              onPressed: () {
-                Get.toNamed(Routes.NOTIFIKASI);
-              },
-              icon: Icon(
-                Icons.notifications,
-                size: 35,
-                color: primaryColor,
-              )),
         ],
       ),
     );

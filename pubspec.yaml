@@ -24,6 +24,10 @@ dependencies:
   path_provider: 2.0.11
   open_file: 3.2.1
   advance_pdf_viewer: 2.0.1
+  image_picker: 0.8.5+3
+  webview_flutter: 3.0.4
+  url_launcher: 6.1.5
+  flutter_countdown_timer: 4.1.0
   flutter: 
     sdk: flutter
 
@@ -31,6 +35,9 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test: 
     sdk: flutter
+
+dependency_overrides:
+  image_picker_android: 0.8.4+13
 
 flutter: 
   assets: 

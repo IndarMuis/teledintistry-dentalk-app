@@ -3,36 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  List<Map<String, String>> programList = [
-    {
-      "programName": "Scalling",
-      "programImage": "assets/image_scalling.png",
-    },
-    {
-      "programName": "Tambal Gigi",
-      "programImage": "assets/image_tambalGigi.png"
-    },
-    {
-      "programName": "Bleaching",
-      "programImage": "assets/image_tambalGigi.png",
-    },
-  ];
-
-  List<Map<String, String>> doctorList = [
-    {
-      "doctorName": "drg. Sari Aldilawati, M.Kes",
-      "doctorImage": "assets/image_dokter_1.png"
-    },
-    {
-      "doctorName": "drg. Amanah Pertiwisari",
-      "doctorImage": "assets/image_dokter_1.png"
-    },
-    {
-      "doctorName": "drg. Wanda Hamidah",
-      "doctorImage": "assets/image_dokter_1.png"
-    },
-  ];
-
   List<Map<String, String>> listOfArticles = [
     {
       "articleTitle": "Kriteria Gigi Sehat pada Anak dan Cara Merawatnya",
@@ -47,6 +17,8 @@ class HomeController extends GetxController {
   var dataUser = {}.obs;
   var dataProgram = [].obs;
   var dataDokter = [].obs;
+  var dataArtikel = [].obs;
+
   var isLoading = false.obs;
   var uid = "".obs;
 
@@ -62,6 +34,7 @@ class HomeController extends GetxController {
     var collection = FirebaseFirestore.instance.collection('users');
     var program = FirebaseFirestore.instance.collection('program');
     var dokter = FirebaseFirestore.instance.collection('dokter');
+    var artikel = FirebaseFirestore.instance.collection('artikel');
 
     final User? user = auth.currentUser;
     uid.value = await auth.currentUser!.uid;
@@ -69,6 +42,7 @@ class HomeController extends GetxController {
     var docUser = await collection.doc('${user!.uid}').get();
     var docProgram = await program;
     var docDokter = await dokter;
+    var docArtikel = await artikel;
 
     if (docUser.exists) {
       dataUser.value = await docUser.data()!;
@@ -83,7 +57,13 @@ class HomeController extends GetxController {
           dataDokter.add(element.data());
         });
       });
-      print(dataDokter);
+
+      await docArtikel.get().then((value) => {
+            value.docs.forEach((element) {
+              dataArtikel.add(element.data());
+            })
+          });
+
       isLoading.value = false;
     }
     super.onInit();

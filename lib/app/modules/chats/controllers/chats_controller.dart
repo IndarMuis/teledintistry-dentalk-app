@@ -276,8 +276,6 @@ class ChatsController extends GetxController {
           dataPasien.add(element.data());
         });
       }
-      print("AKUN DOKTER");
-      print(dataPasien);
     }
 
     isLoading.value = false;

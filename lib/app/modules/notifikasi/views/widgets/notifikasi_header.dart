@@ -7,35 +7,10 @@ class NotifikasiHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                color: secondaryTextColor.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(13)),
-            child: Center(
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: secondaryTextColor,
-                  size: 30,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 3.8,
-          ),
-          Text(
-            "Notifikasi",
-            style: primaryTextStyle.copyWith(fontSize: 23, fontWeight: bold),
-          ),
-        ],
+    return Center(
+      child: Text(
+        "Notifikasi",
+        style: primaryTextStyle.copyWith(fontSize: 23, fontWeight: bold),
       ),
     );
   }

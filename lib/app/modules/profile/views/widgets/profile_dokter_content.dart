@@ -89,8 +89,8 @@ class ProfileDokterContent extends StatelessWidget {
           ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(13),
-                primary: Colors.red[900],
+                padding: EdgeInsets.all(10),
+                primary: errorColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(defaultMargin)),
               ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class DaftarProgramController extends GetxController {
@@ -14,14 +15,24 @@ class DaftarProgramController extends GetxController {
       "programName": "Bleaching",
       "programImage": "assets/image_tambalGigi.png",
     },
-    {
-      "programName": "Fetching",
-      "programImage": "assets/image_scalling.png",
-    },
   ];
 
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  RxList allProgram = [].obs;
+  var isLoading = false.obs;
+
   @override
-  void onInit() {
+  void onInit() async {
+    isLoading.value = true;
+    var data = await _firestore.collection("program").get();
+
+    var dataProgram = await data;
+
+    dataProgram.docs.forEach((element) {
+      allProgram.add(element.data());
+    });
+
+    isLoading.value = false;
     super.onInit();
   }
 

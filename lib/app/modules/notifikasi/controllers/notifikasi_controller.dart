@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -48,18 +47,30 @@ class NotifikasiController extends GetxController {
     }
   }
 
-  @override
-  void onInit() async {
-    isLoading.value = true;
-    var firebase = await FirebaseFirestore.instance
+  Stream<DocumentSnapshot<Map<String, dynamic>>> notifSteram() {
+    var firebase = FirebaseFirestore.instance
         .collection("pasien")
         .doc(auth.currentUser!.uid)
-        .get();
+        .snapshots();
 
-    var data = firebase.data();
+    return firebase;
+  }
 
-    dataNotifikasi.value = await data!;
-    isLoading.value = false;
+  @override
+  void onInit() {
+    // try {
+    //   var firebase = await FirebaseFirestore.instance
+    //       .collection("pasien")
+    //       .doc(auth.currentUser!.uid)
+    //       .get();
+
+    //   var data = firebase.data();
+
+    //   dataNotifikasi.value = await data!;
+    // } catch (e) {
+    //   isLoading.value = false;
+    // }
+
     super.onInit();
   }
 
