@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:teledintistry/app/modules/artikel_view/controllers/artikel_view_controller.dart';
 import 'package:teledintistry/app/theme.dart';
-import 'package:get/get.dart';
 
 class ArtikelViewHeader extends StatelessWidget {
   ArtikelViewHeader({Key? key}) : super(key: key);

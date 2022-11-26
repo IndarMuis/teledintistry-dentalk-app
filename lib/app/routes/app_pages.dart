@@ -16,6 +16,8 @@ import 'package:teledintistry/app/modules/daftar_artikel/bindings/daftar_artikel
 import 'package:teledintistry/app/modules/daftar_artikel/views/daftar_artikel_view.dart';
 import 'package:teledintistry/app/modules/daftar_program/bindings/daftar_program_binding.dart';
 import 'package:teledintistry/app/modules/daftar_program/views/daftar_program_view.dart';
+import 'package:teledintistry/app/modules/daftar_tindakan/bindings/daftar_tindakan_binding.dart';
+import 'package:teledintistry/app/modules/daftar_tindakan/views/daftar_tindakan_view.dart';
 import 'package:teledintistry/app/modules/detail_pasien/bindings/detail_pasien_binding.dart';
 import 'package:teledintistry/app/modules/detail_pasien/views/detail_pasien_view.dart';
 import 'package:teledintistry/app/modules/detail_profile_dokter/bindings/detail_profile_dokter_binding.dart';
@@ -30,6 +32,8 @@ import 'package:teledintistry/app/modules/home_doctor/bindings/home_doctor_bindi
 import 'package:teledintistry/app/modules/home_doctor/views/home_doctor_view.dart';
 import 'package:teledintistry/app/modules/info_program/bindings/info_program_binding.dart';
 import 'package:teledintistry/app/modules/info_program/views/info_program_view.dart';
+import 'package:teledintistry/app/modules/list_doctor/bindings/list_doctor_binding.dart';
+import 'package:teledintistry/app/modules/list_doctor/views/list_doctor_view.dart';
 import 'package:teledintistry/app/modules/list_pasien/bindings/list_pasien_binding.dart';
 import 'package:teledintistry/app/modules/list_pasien/views/list_pasien_view.dart';
 import 'package:teledintistry/app/modules/login/bindings/login_binding.dart';
@@ -54,6 +58,8 @@ import 'package:teledintistry/app/modules/register/bindings/register_binding.dar
 import 'package:teledintistry/app/modules/register/views/register_view.dart';
 import 'package:teledintistry/app/modules/rujukan/bindings/rujukan_binding.dart';
 import 'package:teledintistry/app/modules/rujukan/views/rujukan_view.dart';
+import 'package:teledintistry/app/modules/splash_screen_page/bindings/splash_screen_page_binding.dart';
+import 'package:teledintistry/app/modules/splash_screen_page/views/splash_screen_page_view.dart';
 import 'package:teledintistry/app/modules/view_file_pdf/bindings/view_file_pdf_binding.dart';
 import 'package:teledintistry/app/modules/view_file_pdf/views/view_file_pdf_view.dart';
 
@@ -62,7 +68,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.SPLASH_SCREEN_PAGE;
 
   static final routes = [
     GetPage(
@@ -74,6 +80,7 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.REGISTER,
@@ -204,6 +211,22 @@ class AppPages {
       name: _Paths.DETAIL_PROFILE_DOKTER,
       page: () => DetailProfileDokterView(),
       binding: DetailProfileDokterBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN_PAGE,
+      page: () => SplashScreenPageView(),
+      binding: SplashScreenPageBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.LIST_DOCTOR,
+      page: () => ListDoctorView(),
+      binding: ListDoctorBinding(),
+    ),
+    GetPage(
+      name: _Paths.DAFTAR_TINDAKAN,
+      page: () => DaftarTindakanView(),
+      binding: DaftarTindakanBinding(),
     ),
   ];
 }

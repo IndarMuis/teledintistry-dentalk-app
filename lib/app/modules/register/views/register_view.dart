@@ -157,6 +157,7 @@ class RegisterView extends GetView<RegisterController> {
                 borderRadius: BorderRadius.all(Radius.circular(25)),
                 child: TextFormField(
                   controller: controller.emailController,
+                  validator: (value) {},
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     hintText: "Email",

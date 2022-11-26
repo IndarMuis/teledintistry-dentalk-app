@@ -9,6 +9,7 @@ import '../controllers/info_program_controller.dart';
 class InfoProgramView extends GetView<InfoProgramController> {
   @override
   Widget build(BuildContext context) {
+    print(controller.dataProgram['image_program']);
     return SafeArea(
       child: Scaffold(
           backgroundColor: backgroundColor,
@@ -43,9 +44,9 @@ class InfoProgramView extends GetView<InfoProgramController> {
                     ),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+                          EdgeInsets.symmetric(horizontal: 23, vertical: 23),
                       margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 2.5),
+                          top: MediaQuery.of(context).size.height / 3),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),

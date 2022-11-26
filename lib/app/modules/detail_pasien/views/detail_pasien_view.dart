@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:teledintistry/app/modules/detail_pasien/views/widgets/detail_pasien_header.dart';
 import 'package:teledintistry/app/routes/app_pages.dart';
 import 'package:teledintistry/app/theme.dart';
@@ -47,31 +45,34 @@ class DetailPasienView extends GetView<DetailPasienController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Nama : ${controller.dataPasien['pasien']['nama_pasien']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: bold,
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Nama : ${controller.dataPasien['pasien']['nama_pasien']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                              Text(
-                                "Umur : ${controller.dataPasien['pasien']['umur_pasien']} Tahun",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: medium,
+                                Text(
+                                  "Umur : ${controller.dataPasien['pasien']['umur_pasien']} Tahun",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Telepon : ${controller.dataPasien['pasien']['telepon_pasien']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: medium,
+                                Text(
+                                  "Telepon : ${controller.dataPasien['pasien']['telepon_pasien']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 5,
@@ -201,7 +202,8 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                       null)
                                   ? Expanded(
                                       child: Text(
-                                        "fileresep.pdf",
+                                        controller.dataPasien['notifikasi']
+                                            ['resep']['nama_file'],
                                         style: primaryTextStyle.copyWith(
                                           fontSize: 15,
                                           fontWeight: semiBold,
@@ -303,7 +305,8 @@ class DetailPasienView extends GetView<DetailPasienController> {
                                       null)
                                   ? Expanded(
                                       child: Text(
-                                        "fileresep.pdf",
+                                        controller.dataPasien['notifikasi']
+                                            ['rujukan']['nama_file'],
                                         style: primaryTextStyle.copyWith(
                                           fontSize: 15,
                                           fontWeight: semiBold,

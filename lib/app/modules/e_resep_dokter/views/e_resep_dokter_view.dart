@@ -57,31 +57,34 @@ class EResepDokterView extends GetView<EResepDokterController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Nama : ${controller.dataPasien['username']}",
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: bold,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Nama : ${controller.dataPasien['username']}",
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 15,
+                                        fontWeight: bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  Text(
-                                    "Umur : ${controller.dataPasien['umur']}",
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: medium,
+                                    Text(
+                                      "Umur : ${controller.dataPasien['umur']}",
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 15,
+                                        fontWeight: medium,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "Telepon : ${controller.dataPasien['telepon']}",
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 15,
-                                      fontWeight: medium,
+                                    Text(
+                                      "Telepon : ${controller.dataPasien['telepon']}",
+                                      style: primaryTextStyle.copyWith(
+                                        fontSize: 15,
+                                        fontWeight: medium,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 width: 5,
@@ -123,7 +126,7 @@ class EResepDokterView extends GetView<EResepDokterController> {
                                             overflow: TextOverflow.ellipsis,
                                           )
                                         : Text(
-                                            "Upload resep",
+                                            "Upload resep (PDF Document)",
                                             style: secondaryTextStyle.copyWith(
                                                 fontSize: 14,
                                                 fontWeight: light,

@@ -60,20 +60,6 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                                     ],
                                   ),
                                 ),
-                                // Image.network(
-                                //     "${controller.dataDokter['image_dokter']}",
-                                //     width: 130,
-                                //     height: 130, loadingBuilder:
-                                //         (context, child, loadingProgress) {
-                                //   if (loadingProgress == null) {
-                                //     return child;
-                                //   }
-                                //   return Center(
-                                //     child: CircularProgressIndicator(
-                                //       color: backgroundColor,
-                                //     ),
-                                //   );
-                                // })
                                 Container(
                                   width: 130,
                                   height: 130,
@@ -198,9 +184,15 @@ class HomeDoctorView extends GetView<HomeDoctorController> {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                                 children: controller.dataArtikel.map((value) {
-                              return DaftarArtikelPopulerCard(
-                                  articleTitle: value['title_artikel']!,
-                                  articleImage: value['image_artikel']!);
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(Routes.ARTIKEL_VIEW,
+                                      arguments: value['url_artikel']);
+                                },
+                                child: DaftarArtikelPopulerCard(
+                                    articleTitle: value['title_artikel']!,
+                                    articleImage: value['image_artikel']!),
+                              );
                             }).toList()),
                           ),
                         ),

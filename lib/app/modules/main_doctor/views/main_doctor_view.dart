@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:teledintistry/app/modules/add_queue/views/add_queue_view.dart';
 import 'package:teledintistry/app/modules/all_fitur_dokter/views/all_fitur_dokter_view.dart';
-import 'package:teledintistry/app/modules/chat_room/views/chat_room_view.dart';
 import 'package:teledintistry/app/modules/chats/views/chats_view.dart';
-import 'package:teledintistry/app/modules/histories/views/histories_view.dart';
-import 'package:teledintistry/app/modules/home/views/home_view.dart';
 import 'package:teledintistry/app/modules/home_doctor/views/home_doctor_view.dart';
-import 'package:teledintistry/app/modules/list_pasien/views/list_pasien_view.dart';
 import 'package:teledintistry/app/modules/main_doctor/controllers/main_doctor_controller.dart';
-import 'package:teledintistry/app/modules/pasien_terdaftar/controllers/pasien_terdaftar_controller.dart';
 import 'package:teledintistry/app/modules/profile/views/profile_view.dart';
 import 'package:teledintistry/app/theme.dart';
 

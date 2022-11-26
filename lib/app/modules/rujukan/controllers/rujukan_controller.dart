@@ -33,31 +33,37 @@ class RujukanController extends GetxController {
       var storage = FirebaseStorage.instance;
       if (documentPath.value.isNotEmpty) {
         File file = File(documentPath.value);
+        if (file.path.contains(".pdf")) {
+          TaskSnapshot taskSnapshot = await storage
+              .ref('users/${dataPasien['uid']}/rujukan/${documentName.value}')
+              .putFile(file);
+          final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
-        TaskSnapshot taskSnapshot = await storage
-            .ref('users/${dataPasien['uid']}/rujukan/${documentName.value}')
-            .putFile(file);
-        final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-
-        await FirebaseFirestore.instance
-            .collection("pasien")
-            .doc(dataPasien['uid'])
-            .set({
-          "notifikasi": {
-            "rujukan": {
-              "id_dokter": dataDokter['id_dokter'],
-              "nama_file": documentName.value,
-              "nama_dokter": dataDokter['nama_dokter'],
-              "file_rujukan": downloadUrl,
-            }
-          },
-        }, SetOptions(merge: true));
-        isLoading.value = false;
-        await successSnackBar(
-            title: "Berhasil mengirim rujukan",
-            message:
-                "Berhasil mengirim rujukan pada pasien ${dataPasien['username']}");
-        Get.offAllNamed(Routes.MAIN_DOCTOR);
+          await FirebaseFirestore.instance
+              .collection("pasien")
+              .doc(dataPasien['uid'])
+              .set({
+            "notifikasi": {
+              "rujukan": {
+                "id_dokter": dataDokter['id_dokter'],
+                "nama_file": documentName.value,
+                "nama_dokter": dataDokter['nama_dokter'],
+                "file_rujukan": downloadUrl,
+              }
+            },
+          }, SetOptions(merge: true));
+          isLoading.value = false;
+          await successSnackBar(
+              title: "Berhasil mengirim rujukan",
+              message:
+                  "Berhasil mengirim rujukan pada pasien ${dataPasien['username']}");
+          Get.offAllNamed(Routes.MAIN_DOCTOR);
+        } else {
+          isLoading.value = false;
+          errorSnackBar(
+              title: "Format File Tidak Sesuai",
+              message: "Silahkan periksa kembali file anda");
+        }
       } else {
         isLoading.value = false;
         await errorSnackBar(
@@ -65,6 +71,7 @@ class RujukanController extends GetxController {
             message: "Silahkan masukkan file rujukan terlebih dahulu");
       }
     } on FirebaseException catch (e) {
+      print(e.message);
       isLoading.value = false;
       await errorSnackBar(
           title: "Gagal Mengirim Rujukan",

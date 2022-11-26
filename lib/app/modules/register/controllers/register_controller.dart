@@ -59,17 +59,6 @@ class RegisterController extends GetxController {
           await errorSnackBar(
               title: "Registration Failed",
               message: "Password harus terdiri dari 8 karakter atau lebih.");
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-          await errorSnackBar(
-            title: "Registration Failed",
-            message: "Email sudah terdaftar, silahkan gunakan email lain.",
-          );
-        } else if (e.code == 'invalid-email') {
-          await errorSnackBar(
-            title: "Registration Failed",
-            message: "Format email yang dimasukkan tidak sesuai.",
-          );
         }
       } catch (e) {
         isLoading.value = false;

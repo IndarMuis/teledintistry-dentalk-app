@@ -56,7 +56,6 @@ class ChatsController extends GetxController {
 
   Future<bool> existingUser(String uid) async {
     CollectionReference users = await _firestore.collection("users");
-    CollectionReference dokter = await _firestore.collection("dokter");
 
     var existUser = await users.doc(uid).get();
 
@@ -146,7 +145,7 @@ class ChatsController extends GetxController {
 
       if (chatsDocs.docs.length != 0) {
         final chatDataId = chatsDocs.docs[0].id;
-        final chatData = chatsDocs.docs[0].data() as Map<String, dynamic>;
+        // final chatData = chatsDocs.docs[0].data() as Map<String, dynamic>;
 
         if (existPasien) {
           print("masuk disini");
@@ -273,7 +272,9 @@ class ChatsController extends GetxController {
         dataPasien.value = [];
       } else {
         data.docs.forEach((element) {
-          dataPasien.add(element.data());
+          if (element.data()['dokter']['id_dokter'] == auth.currentUser!.uid) {
+            dataPasien.add(element.data());
+          }
         });
       }
     }

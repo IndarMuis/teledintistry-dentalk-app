@@ -337,9 +337,9 @@ class OdontogramView extends GetView<OdontogramController> {
                             onPressed: () {
                               controller.addNewOdontogram();
                             },
-                            style: ElevatedButton.styleFrom(
+                            style: TextButton.styleFrom(
                                 padding: EdgeInsets.all(10),
-                                primary: Colors.white,
+                                backgroundColor: Colors.white,
                                 elevation: 0,
                                 fixedSize: Size(
                                     MediaQuery.of(context).size.width / 2.5,
@@ -374,7 +374,7 @@ class OdontogramView extends GetView<OdontogramController> {
                                   margin: EdgeInsets.only(top: 10),
                                   child: Column(
                                     children: controller
-                                        .daftarPerubahanOdontogram.value
+                                        .daftarPerubahanOdontogram
                                         .map((data) {
                                       print(data);
                                       return Container(
@@ -451,8 +451,8 @@ class OdontogramView extends GetView<OdontogramController> {
                       onPressed: () {
                         controller.daftarPerubahanOdontogram.value = [];
                       },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.red[400],
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.red[400],
                           padding: EdgeInsets.all(10),
                           elevation: 0,
                           fixedSize: Size(
@@ -495,9 +495,9 @@ class OdontogramView extends GetView<OdontogramController> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
+                                      style: TextButton.styleFrom(
                                           elevation: 0,
-                                          primary: Colors.white,
+                                          backgroundColor: Colors.white,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 10, horizontal: 30),
                                           shape: RoundedRectangleBorder(
@@ -518,9 +518,9 @@ class OdontogramView extends GetView<OdontogramController> {
                                       ),
                                     ),
                                     ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
+                                      style: TextButton.styleFrom(
                                           elevation: 0,
-                                          primary: primaryColor,
+                                          backgroundColor: primaryColor,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 10, horizontal: 30),
                                           shape: RoundedRectangleBorder(
@@ -543,8 +543,8 @@ class OdontogramView extends GetView<OdontogramController> {
                               ],
                             ));
                       },
-                      style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
+                      style: TextButton.styleFrom(
+                          backgroundColor: primaryColor,
                           padding: EdgeInsets.all(10),
                           elevation: 0,
                           fixedSize: Size(

@@ -33,6 +33,9 @@ abstract class Routes {
   static const ALL_FITUR_DOKTER = _Paths.ALL_FITUR_DOKTER;
   static const ARTIKEL_VIEW = _Paths.ARTIKEL_VIEW;
   static const DETAIL_PROFILE_DOKTER = _Paths.DETAIL_PROFILE_DOKTER;
+  static const SPLASH_SCREEN_PAGE = _Paths.SPLASH_SCREEN_PAGE;
+  static const LIST_DOCTOR = _Paths.LIST_DOCTOR;
+  static const DAFTAR_TINDAKAN = _Paths.DAFTAR_TINDAKAN;
 }
 
 abstract class _Paths {
@@ -65,4 +68,7 @@ abstract class _Paths {
   static const ALL_FITUR_DOKTER = '/all-fitur-dokter';
   static const ARTIKEL_VIEW = '/artikel-view';
   static const DETAIL_PROFILE_DOKTER = '/detail-profile-dokter';
+  static const SPLASH_SCREEN_PAGE = '/splash-screen-page';
+  static const LIST_DOCTOR = '/list-doctor';
+  static const DAFTAR_TINDAKAN = '/daftar-tindakan';
 }

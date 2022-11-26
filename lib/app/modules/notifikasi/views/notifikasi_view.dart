@@ -15,14 +15,19 @@ class NotifikasiView extends GetView<NotifikasiController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>?>(
             stream: controller.notifSteram(),
             builder: (context, snapshot) {
               print(snapshot);
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
                   var data = snapshot.data!.data();
-                  var dataNotif = data?['notifikasi'] as Map;
+                  var dataNotif = {};
+                  if (data != null) {
+                    dataNotif = data['notifikasi'] as Map<String, dynamic>;
+                  } else {
+                    dataNotif = {};
+                  }
                   print(dataNotif);
                   if (dataNotif.isNotEmpty) {
                     return Padding(
@@ -93,14 +98,12 @@ class NotifikasiView extends GetView<NotifikasiController> {
                                                   dialogVerification(
                                                       onConfirm: () {
                                                         controller.openFile(
-                                                            url: data['notifikasi']
-                                                                    ['resep']
+                                                            url: dataNotif[
+                                                                    'resep']
                                                                 ['file_resep'],
-                                                            fileName: controller
-                                                                        .dataNotifikasi[
-                                                                    'notifikasi']
-                                                                [
-                                                                'resep']['nama_file']);
+                                                            fileName: dataNotif[
+                                                                    'resep']
+                                                                ['nama_file']);
                                                       },
                                                       title: "Download File",
                                                       icon: Icons.download,
@@ -182,14 +185,12 @@ class NotifikasiView extends GetView<NotifikasiController> {
                                                   dialogVerification(
                                                       onConfirm: () {
                                                         controller.openFile(
-                                                            url: data['notifikasi']
-                                                                    ['resep']
+                                                            url: dataNotif[
+                                                                    'resep']
                                                                 ['file_resep'],
-                                                            fileName: controller
-                                                                        .dataNotifikasi[
-                                                                    'notifikasi']
-                                                                [
-                                                                'resep']['nama_file']);
+                                                            fileName: dataNotif[
+                                                                    'resep']
+                                                                ['nama_file']);
                                                       },
                                                       title: "Download File",
                                                       icon: Icons.download,

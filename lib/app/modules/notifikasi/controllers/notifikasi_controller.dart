@@ -45,6 +45,7 @@ class NotifikasiController extends GetxController {
     } on DioError catch (e) {
       print(e.response);
     }
+    return null;
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> notifSteram() {

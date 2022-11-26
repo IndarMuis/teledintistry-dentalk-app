@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 class AllFiturDokterController extends GetxController {
-  //TODO: Implement AllFiturDokterController
-
   final count = 0.obs;
   @override
   void onInit() {

@@ -6,11 +6,18 @@ class PasienTerdaftarController extends GetxController {
   var isLoading = false.obs;
   var daftarPasien = [].obs;
 
+  FirebaseAuth userAuth = FirebaseAuth.instance;
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamDataPasien() {
+    var pasien = FirebaseFirestore.instance.collection('pasien');
+
+    return pasien.snapshots();
+  }
+
   @override
   void onInit() async {
     isLoading.value = true;
 
-    FirebaseAuth userAuth = FirebaseAuth.instance;
     var pasien = FirebaseFirestore.instance.collection('pasien');
 
     var dataPasien = await pasien;

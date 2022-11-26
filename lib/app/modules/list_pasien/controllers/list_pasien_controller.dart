@@ -8,6 +8,13 @@ class ListPasienController extends GetxController {
   var fromPage = "".obs;
 
   var isLoading = false.obs;
+  FirebaseAuth userAuth = FirebaseAuth.instance;
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamDataPasien() {
+    var pasien = FirebaseFirestore.instance.collection('pasien');
+
+    return pasien.snapshots();
+  }
 
   @override
   void onInit() async {
@@ -15,7 +22,6 @@ class ListPasienController extends GetxController {
     Map<String, dynamic>? dataArguments = await Get.arguments;
     fromPage.value = dataArguments!['from_page'];
 
-    FirebaseAuth userAuth = FirebaseAuth.instance;
     var pasien = FirebaseFirestore.instance.collection('pasien');
 
     var dataPasien = await pasien;

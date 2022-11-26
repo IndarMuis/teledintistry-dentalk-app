@@ -33,36 +33,44 @@ class EResepDokterController extends GetxController {
       var storage = FirebaseStorage.instance;
       if (documentPath.value.isNotEmpty) {
         File file = File(documentPath.value);
+        if (file.path.contains(".pdf")) {
+          TaskSnapshot taskSnapshot = await storage
+              .ref('users/${dataPasien['uid']}/resep/${documentName.value}')
+              .putFile(file);
+          final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
-        TaskSnapshot taskSnapshot = await storage
-            .ref('users/${dataPasien['uid']}/resep/${documentName.value}')
-            .putFile(file);
-        final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-
-        await FirebaseFirestore.instance
-            .collection("pasien")
-            .doc(dataPasien['uid'])
-            .set({
-          "notifikasi": {
-            "resep": {
-              "id_dokter": dataDokter['id_dokter'],
-              "nama_file": documentName.value,
-              "nama_dokter": dataDokter['nama_dokter'],
-              "file_resep": downloadUrl,
-            }
-          },
-        }, SetOptions(merge: true));
-        isLoading.value = false;
-        await successSnackBar(
-            title: "Berhasil mengirim resep",
-            message:
-                "Berhasil mengirim resep pada pasien ${dataPasien['username']}");
-        Get.offAllNamed(Routes.MAIN_DOCTOR);
+          await FirebaseFirestore.instance
+              .collection("pasien")
+              .doc(dataPasien['uid'])
+              .set({
+            "notifikasi": {
+              "resep": {
+                "id_dokter": dataDokter['id_dokter'],
+                "nama_file": documentName.value,
+                "nama_dokter": dataDokter['nama_dokter'],
+                "file_resep": downloadUrl,
+              }
+            },
+          }, SetOptions(merge: true));
+          isLoading.value = false;
+          await successSnackBar(
+              title: "Berhasil mengirim resep",
+              message:
+                  "Berhasil mengirim resep pada pasien ${dataPasien['username']}");
+          Get.offAllNamed(Routes.MAIN_DOCTOR);
+        } else {
+          isLoading.value = false;
+          await errorSnackBar(
+              title: "Gagal Mengirim Resep",
+              message: "File harus berupa document pdf");
+          Get.back();
+        }
       } else {
         isLoading.value = false;
         await errorSnackBar(
             title: "Gagal Mengirim Resep",
             message: "Silahkan masukkan file resep terlebih dahulu");
+        Get.back();
       }
     } on FirebaseException catch (e) {
       print(e.message);

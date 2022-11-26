@@ -12,6 +12,11 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application",
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          
+        )
+      ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

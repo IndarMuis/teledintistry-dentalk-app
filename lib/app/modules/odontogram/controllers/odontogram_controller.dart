@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -188,12 +187,6 @@ class OdontogramController extends GetxController {
     odontogramImage.forEach((img) async {
       isLoading.value = true;
 
-      var authUser = FirebaseAuth.instance;
-      // String imageName =
-      //     img.substring(img.lastIndexOf("/") + 1, img.lastIndexOf("."));
-
-      // String path = img.substring(img.indexOf("/") + 1, img.lastIndexOf("/"));
-
       final Directory systemTempDir = Directory.systemTemp;
       final byteData = await rootBundle.load(img['image']);
       final file = File("${systemTempDir.path}/${img['id']}.png");
@@ -272,6 +265,7 @@ class OdontogramController extends GetxController {
       dataPasien.value = await user.data()!;
       odontogramPasien.value = await user.data()!['odontogram'];
     } on FirebaseException catch (e) {
+      print(e.message);
       isLoading.value = false;
     }
 

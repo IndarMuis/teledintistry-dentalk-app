@@ -16,7 +16,7 @@
         </intent>
     </queries>
    <application
-        android:label="teledintistry"
+        android:label="Dentalk"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

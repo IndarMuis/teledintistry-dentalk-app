@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:teledintistry/app/helper_widget.dart';
 import 'package:teledintistry/app/theme.dart';
 
 import '../controllers/on_boarding_controller.dart';

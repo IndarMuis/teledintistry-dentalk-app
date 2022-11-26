@@ -5,8 +5,8 @@ import '../../../../theme.dart';
 class DaftarArtikelPopulerCard extends StatelessWidget {
   DaftarArtikelPopulerCard(
       {required this.articleTitle, required this.articleImage});
-  String articleTitle;
-  String articleImage;
+  final String articleTitle;
+  final String articleImage;
   @override
   Widget build(BuildContext context) {
     return Container(

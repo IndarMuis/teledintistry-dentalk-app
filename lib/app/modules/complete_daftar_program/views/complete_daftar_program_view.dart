@@ -70,10 +70,16 @@ class CompleteDaftarProgramView
                                 width: 30,
                               ),
                               Container(
-                                margin: EdgeInsets.only(
-                                  left: 10,
+                                margin: EdgeInsets.only(left: 10, right: 5),
+                                child: Text(
+                                  e['nama_dokter'],
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
-                                child: Text(e['nama_dokter']),
                               ),
                             ],
                           ),
@@ -111,31 +117,35 @@ class CompleteDaftarProgramView
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Program ${controller.dataProgram['nama_program']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: semiBold,
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Program ${controller.dataProgram['nama_program']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: semiBold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
                                 ),
-                              ),
-                              Text(
-                                "Waktu pemeriksaan ${controller.dataProgram['waktu_pemeriksaan_program']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: medium,
+                                Text(
+                                  "Waktu pemeriksaan ${controller.dataProgram['waktu_pemeriksaan_program']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Jadwal Pemeriksaan ${controller.dataProgram['jadwal_pemeriksaan_program']}",
-                                style: primaryTextStyle.copyWith(
-                                  fontSize: 15,
-                                  fontWeight: medium,
+                                Text(
+                                  "Jadwal Pemeriksaan ${controller.dataProgram['jadwal_pemeriksaan_program']}",
+                                  style: primaryTextStyle.copyWith(
+                                    fontSize: 15,
+                                    fontWeight: medium,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 5,

@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 class MainDoctorController extends GetxController {
-  //TODO: Implement MainDoctorController
-
   final count = 0.obs;
   @override
   void onInit() {

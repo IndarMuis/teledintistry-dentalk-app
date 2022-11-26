@@ -77,23 +77,14 @@ class HistoriesView extends GetView<HistoriesController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${namaProgram}",
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 20,
-                    fontWeight: medium,
-                  ),
-                ),
-                Text(
-                  "${tanggalDaftar}",
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 13,
-                  ),
-                ),
-              ],
+            Text(
+              "${namaProgram}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 20,
+                fontWeight: medium,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
             SizedBox(
               height: 20,
@@ -112,6 +103,15 @@ class HistoriesView extends GetView<HistoriesController> {
               "Durasi Pemeriksaan : ${durasiPemeriksaan}",
               style: primaryTextStyle.copyWith(
                 fontSize: 15,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "${tanggalDaftar}",
+              style: primaryTextStyle.copyWith(
+                fontSize: 13,
               ),
             ),
           ],

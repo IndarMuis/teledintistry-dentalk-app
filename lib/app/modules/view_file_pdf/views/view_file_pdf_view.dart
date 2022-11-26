@@ -1,7 +1,5 @@
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-
 import 'package:get/get.dart';
 import 'package:teledintistry/app/modules/view_file_pdf/views/widgets/view_file_pdf_header.dart';
 import 'package:teledintistry/app/theme.dart';

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:teledintistry/app/modules/daftar_program/views/widgets/daftar_program_header.dart';
-import 'package:teledintistry/app/modules/daftar_program/views/widgets/daftar_program_card.dart';
 import 'package:teledintistry/app/routes/app_pages.dart';
 
 import '../../../theme.dart';
 import '../controllers/daftar_program_controller.dart';
+import 'widgets/program_card.dart';
 
 class DaftarProgramView extends GetView<DaftarProgramController> {
   @override
@@ -43,34 +43,6 @@ class DaftarProgramView extends GetView<DaftarProgramController> {
                     SizedBox(
                       height: 40,
                     ),
-                    // Material(
-                    //   shadowColor: primaryColor.withOpacity(0.5),
-                    //   elevation: 5,
-                    //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                    //   child: TextFormField(
-                    //     decoration: InputDecoration(
-                    //       fillColor: backgroundColor,
-                    //       hintText: "Search Program",
-                    //       suffixIcon: Icon(
-                    //         Icons.search,
-                    //         size: 25,
-                    //       ),
-                    //       suffixIconColor: secondaryTextColor,
-                    //       hintStyle: secondaryTextStyle,
-                    //       border: UnderlineInputBorder(
-                    //           borderRadius:
-                    //               BorderRadius.all(Radius.circular(25)),
-                    //           borderSide: BorderSide(
-                    //               color: Colors.white,
-                    //               style: BorderStyle.none)),
-                    //       filled: true,
-                    //       contentPadding: EdgeInsets.all(15),
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
                     Text("All Program",
                         style: primaryTextStyle.copyWith(
                           fontSize: 20,
@@ -80,19 +52,100 @@ class DaftarProgramView extends GetView<DaftarProgramController> {
                       height: 15,
                     ),
                     Column(
-                      children: controller.allProgram.map((data) {
-                        return GestureDetector(
+                      children: [
+                        GestureDetector(
                           onTap: () {
                             Get.toNamed(
-                              Routes.INFO_PROGRAM,
-                              arguments: data['nama_program'],
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {"jenis_program": "Konservasi Gigi"},
                             );
                           },
-                          child: DaftarProgramCard(
-                              programName: data['nama_program']!,
-                              programImage: data['image_program']!),
-                        );
-                      }).toList(),
+                          child: ProgramCard(
+                              namaProgram: "Konservasi Gigi",
+                              jumlahTindakan: 5),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {
+                                "jenis_program": "Ortodontic (Kawat Gigi)"
+                              },
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Ortodontic", jumlahTindakan: 1),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {
+                                "jenis_program": "Radiologi Kedokteran Gigi"
+                              },
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Radiologi Kedokteran Gigi",
+                              jumlahTindakan: 2),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {
+                                "jenis_program":
+                                    "Bedah Mulut Maksilofacial (BM)"
+                              },
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Bedah Mulut Maksilofacial",
+                              jumlahTindakan: 4),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {"jenis_program": "Periodonsia"},
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Periodonsia", jumlahTindakan: 4),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {"jenis_program": "Pedodonsia"},
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Pedodonsia", jumlahTindakan: 5),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {"jenis_program": "Prostodonsia"},
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Prostodonsia", jumlahTindakan: 3),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.DAFTAR_TINDAKAN,
+                              arguments: {
+                                "jenis_program": "Penyakit Mulut (PM)"
+                              },
+                            );
+                          },
+                          child: ProgramCard(
+                              namaProgram: "Penyakit Mulut", jumlahTindakan: 1),
+                        ),
+                      ],
                     )
                   ],
                 ),

@@ -1,18 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:teledintistry/app/modules/home/controllers/home_controller.dart';
-import 'package:teledintistry/app/routes/app_pages.dart';
 
 import '../../../../theme.dart';
 
 class HomeHeader extends StatelessWidget {
   HomeHeader({required this.name, required this.avatar});
-  String name;
-  String avatar;
+  final String name;
+  final String avatar;
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(HomeController());
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

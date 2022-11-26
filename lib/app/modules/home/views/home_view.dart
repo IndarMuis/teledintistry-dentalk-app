@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gallery_3d/gallery3d.dart';
 
 import 'package:get/get.dart';
+import 'package:teledintistry/app/modules/home/views/widgets/home_program_card.dart';
 import 'package:teledintistry/app/routes/app_pages.dart';
 import 'package:teledintistry/app/theme.dart';
 
 import '../controllers/home_controller.dart';
 import 'widgets/home_header.dart';
-import 'widgets/home_program_card.dart';
 
 class HomeView extends GetView<HomeController> {
-  var controller = Get.put(HomeController());
+  final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -60,31 +60,73 @@ class HomeView extends GetView<HomeController> {
                               SizedBox(
                                 height: 15,
                               ),
+                              // SingleChildScrollView(
+                              //   scrollDirection: Axis.horizontal,
+                              //   child: Row(
+                              //       children:
+                              //           controller.dataProgram.map((value) {
+                              //     return (controller.dataProgram.isEmpty)
+                              //         ? Center(
+                              //             child: CircularProgressIndicator(
+                              //               color: primaryColor,
+                              //             ),
+                              //           )
+                              //         : GestureDetector(
+                              //             onTap: () {
+                              //               Get.toNamed(
+                              //                 Routes.INFO_PROGRAM,
+                              //                 arguments: value['id_program'],
+                              //               );
+                              //             },
+                              //             child: HomeProgramCard(
+                              //                 programName:
+                              //                     value['nama_program'],
+                              //                 programImage:
+                              //                     value['image_program']),
+                              //           );
+                              //   }).toList()),
+                              // )
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                    children:
-                                        controller.dataProgram.map((value) {
-                                  return (controller.dataProgram.isEmpty)
-                                      ? Center(
-                                          child: CircularProgressIndicator(
-                                            color: primaryColor,
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              Routes.INFO_PROGRAM,
-                                              arguments: value['nama_program'],
-                                            );
-                                          },
-                                          child: HomeProgramCard(
-                                              programName:
-                                                  value['nama_program'],
-                                              programImage:
-                                                  value['image_program']),
-                                        );
-                                }).toList()),
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.DAFTAR_TINDAKAN,
+                                            arguments: {
+                                              "jenis_program": "Konservasi Gigi"
+                                            });
+                                      },
+                                      child: HomeProgramCard(
+                                          namaProgram: "Konservasi Gigi",
+                                          jumlahTindakan: 5),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.DAFTAR_TINDAKAN,
+                                            arguments: {
+                                              "jenis_program":
+                                                  "Radiologi Kedokteran Gigi"
+                                            });
+                                      },
+                                      child: HomeProgramCard(
+                                          namaProgram:
+                                              "Radiologi Kedokteran Gigi",
+                                          jumlahTindakan: 2),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.DAFTAR_TINDAKAN,
+                                            arguments: {
+                                              "jenis_program": "Prostodonsia"
+                                            });
+                                      },
+                                      child: HomeProgramCard(
+                                          namaProgram: "Prostodonsia",
+                                          jumlahTindakan: 3),
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -103,6 +145,16 @@ class HomeView extends GetView<HomeController> {
                                     style: primaryTextStyle.copyWith(
                                         fontSize: 17, fontWeight: semiBold),
                                   ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(Routes.LIST_DOCTOR);
+                                    },
+                                    child: Text(
+                                      "See all",
+                                      style: secondaryTextStyle.copyWith(
+                                          fontSize: 17, fontWeight: medium),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -119,7 +171,7 @@ class HomeView extends GetView<HomeController> {
                                     radius: 20,
                                     isShowTransformMask: false,
                                   ),
-                                  itemCount: controller.dataDokter.length,
+                                  itemCount: 4,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
@@ -143,10 +195,12 @@ class HomeView extends GetView<HomeController> {
                                                     "${controller.dataDokter[index]['nama_dokter']}",
                                                     style: primaryTextStyle
                                                         .copyWith(
-                                                      fontSize: 15,
+                                                      fontSize: 12.5,
                                                       fontWeight: semiBold,
                                                       color: backgroundColor,
                                                     ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                               ),
@@ -178,26 +232,6 @@ class HomeView extends GetView<HomeController> {
                                                   width: 500,
                                                   height: 500,
                                                 ),
-                                                // child: CachedNetworkImage(
-                                                //   width: 500,
-                                                //   height: 500,
-                                                //   fit: BoxFit.cover,
-                                                //   alignment: Alignment.center,
-                                                //   imageUrl:
-                                                //       "${controller.dataDokter[index]['image_dokter']}",
-                                                //   placeholder: (context, url) =>
-                                                //       SizedBox(
-                                                //     height: 50,
-                                                //     width: 50,
-                                                //     child:
-                                                //         CircularProgressIndicator(
-                                                //       color: backgroundColor,
-                                                //     ),
-                                                //   ),
-                                                //   errorWidget:
-                                                //       (context, url, error) =>
-                                                //           Icon(Icons.error),
-                                                // ),
                                               ),
                                             ),
                                           ],

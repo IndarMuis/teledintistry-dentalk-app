@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:teledintistry/app/helper_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ChatRoomController extends GetxController {
@@ -27,18 +25,6 @@ class ChatRoomController extends GetxController {
     var whatsappURl_android = "whatsapp://send?phone=$number&text=hello";
 
     await launchUrl(Uri.parse(whatsappURl_android));
-    // if (Platform.isAndroid) {
-    //   if (await canLaunchUrl(Uri.parse(whatsappURl_android))) {
-    //   } else {
-    //     await errorSnackBar(
-    //         title: "Failed ro direct whatsapp",
-    //         message: "Whatsapp not installed");
-    //   }
-    // } else {
-    //   await errorSnackBar(
-    //       title: "Failed ro direct whatsapp",
-    //       message: "Whatsapp not installed");
-    // }
   }
 
   Future<Map<String, dynamic>> dataFriend() async {

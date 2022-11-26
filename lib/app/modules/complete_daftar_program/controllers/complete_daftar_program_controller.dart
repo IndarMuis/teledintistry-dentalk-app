@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:teledintistry/app/helper_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:teledintistry/app/helper_widget.dart';
 import 'package:teledintistry/app/routes/app_pages.dart';
 
 class CompleteDaftarProgramController extends GetxController {
@@ -22,7 +21,7 @@ class CompleteDaftarProgramController extends GetxController {
         .collection("pasien")
         .doc(auth.currentUser!.uid)
         .get();
-    if (listDokterValue.value.isNotEmpty) {
+    if (listDokterValue.isNotEmpty) {
       if (!ds.exists) {
         await FirebaseFirestore.instance
             .collection("pasien")

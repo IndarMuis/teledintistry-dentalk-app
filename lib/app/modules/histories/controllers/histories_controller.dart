@@ -41,7 +41,7 @@ class HistoriesController extends GetxController {
         dataUser.value = user.data()!;
         print(user.data());
       } else {
-        data.value.clear();
+        data.clear();
       }
     } on FirebaseException catch (e) {
       print(e.message);
